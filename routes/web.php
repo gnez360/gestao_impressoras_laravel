@@ -32,4 +32,6 @@ Route::group(['prefix' => 'panel', 'as' => 'panel.', 'middleware' => ['auth'], '
     Route::get('user/{idUser}/edit', 'UserController@edit')->name('user.edit');
     Route::put('user/{idUser}', 'UserController@update')->name('user.update');
     Route::delete('user/{idUser}', 'UserController@destroy')->name('user.destroy');
+
+    Route::get('printers','PrinterController@index')->name('printers.index');
 });
