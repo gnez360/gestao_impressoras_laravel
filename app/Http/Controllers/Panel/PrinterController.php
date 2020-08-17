@@ -16,7 +16,7 @@ class PrinterController extends Controller
 
     public function create()
     {
-        return view('printers.create');
+        return view('panel.printers.create');
     }
 
     public function store(Request $request)
@@ -27,7 +27,7 @@ class PrinterController extends Controller
         $product->quantity    = $request->quantity;
         $product->price       = $request->price;
         $product->save();
-        return redirect()->route('printers.index')->with('message', 'Product created successfully!');
+        //return redirect()->route('panel.printers.index')->with('message', 'Product created successfully!');
     }
 
     public function show($id)

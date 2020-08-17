@@ -1,8 +1,8 @@
 <div class="card-body">
     <div class="form-group row">
 
-        {!! Form::label('email', 'E-mail', ['class' => 'col-sm-1 control-label']) !!}
-        <div class="col-sm-3 ">
+        {!! Form::label('numero_serie', 'Número de Série', ['class' => 'col-sm-3 control-label']) !!}
+        <div class="col-sm-6 ">
             {!! Form::text('email',null,['class' => 'form-control input-jqv', 'id' => 'email', 'autocomplete' =>
             'username' ]) !!}
         </div>

@@ -9,8 +9,8 @@
 <div class="card">
     <!-- /.card-header -->
     <div class="card-header">
-        <a href="{{ route('panel.user.create') }}" class="btn btn-primary float-left" role="button">Adicionar
-            Impressora</a>
+        <a href="{{ route('panel.printers.create') }}" class="btn btn-primary float-left" role="button">Adicionar
+            Impressora</a> 
     </div>
     <div class="card-body">
         <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4">
