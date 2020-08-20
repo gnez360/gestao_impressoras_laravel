@@ -34,6 +34,8 @@ Route::group(['prefix' => 'panel', 'as' => 'panel.', 'middleware' => ['auth'], '
     Route::delete('user/{idUser}', 'UserController@destroy')->name('user.destroy');
 
     Route::get('printers','PrinterController@index')->name('printers.index');
+    Route::get('printers/levels','PrinterController@levels')->name('printers.levels');
     Route::get('printers/create','PrinterController@create')->name('printers.create');
     Route::post('printers','PrinterController@store')->name('printers.store');
+    Route::get('printers/test/{ip}','PrinterController@test')->name('printers.test');
 });

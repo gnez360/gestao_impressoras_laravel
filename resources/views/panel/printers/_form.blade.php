@@ -1,34 +1,25 @@
 <div class="card-body">
     <div class="form-group row">
-
-        {!! Form::label('numero_serie', 'Número de Série', ['class' => 'col-sm-3 control-label']) !!}
-        <div class="col-sm-6 ">
-            {!! Form::text('email',null,['class' => 'form-control input-jqv', 'id' => 'email', 'autocomplete' =>
-            'username' ]) !!}
-        </div>
-        @error('name')
-        <span class="invalid-feedback d-block"> {{ $message }} </span>
-        @enderror
-        {!! Form::label('password', 'Senha', ['class' => 'col-sm-1 control-label']) !!}
-        <div class=" col-sm-3">
-            {!! Form::password('password',['class' => 'form-control input-jqv', 'id' => 'password', 'autocomplete' =>
-            'new-password', 'data-toggle' => 'password']) !!}
-            <div class="input-group-append">
-                <span class="input-group-text input-password-hide" style="cursor: pointer;"><i
-                        class="fa fa-eye"></i></span>
+        <fieldset>
+ 
+            <!-- Email -->
+            <div class="form-group">
+                {!! Form::label('email', 'Email:', ['class' => 'col-lg control-label']) !!}
+                <div class="col-lg">
+                    {!! Form::email('email', $value = null, ['class' => 'form-control', 'placeholder' => 'email']) !!}
+                </div>
             </div>
-            @error('password')
-            <span class="invalid-feedback d-block"> {{ $message }} </span>
-            @enderror
-        </div>
+     
+            <!-- Password -->
+            <div class="form-group">
+                {!! Form::label('email', 'Email:', ['class' => 'col-lg control-label']) !!}
+                <div class="col-lg">
+                    {!! Form::email('email', $value = null, ['class' => 'form-control', 'placeholder' => 'email']) !!}
+                </div>
+            </div>    
 
-        {!! Form::label('name', 'Nome Completo', ['class' => 'col-sm-1 control-label']) !!}
-        <div class="col-sm-3">
-            {!! Form::text('name',null,['class' => 'form-control input-jqv', 'id' => 'name']) !!}
-        </div>
-        @error('name')
-        <span class="invalid-feedback d-block"> {{ $message }} </span>
-        @enderror
+     
+        </fieldset>
         
     </div>
 
