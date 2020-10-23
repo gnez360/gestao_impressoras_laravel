@@ -21,6 +21,9 @@ class CreatePrintersTable extends Migration
             $table->string('ipaddress');
             $table->integer('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations');
+            $table->string('type');
+            $table->string('obs')->nullable();;
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +36,6 @@ class CreatePrintersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('impressoras');
+        Schema::dropIfExists('printers');        
     }
 }

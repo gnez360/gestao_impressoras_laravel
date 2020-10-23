@@ -8,10 +8,10 @@ class Locations extends Model
 {
     protected $fillable = ['name'];
     protected $guarded = ['id', 'created_at', 'update_at'];
-    protected $table = 'printers';
+    protected $table = 'locations';  
 
-    public function printers()
+    public function lists()
     {
-        return $this->belongsToMany('App\Printers');
+        return $this;  
     }
 }

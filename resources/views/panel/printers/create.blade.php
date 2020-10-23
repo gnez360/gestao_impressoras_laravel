@@ -4,7 +4,7 @@
 
 @section('content')
 @include('includes.alert')
-<div class="card card-info">
+<div class="card card-info" style="width: 50%;">
     <div class="card-header">
         <h3 class="card-title">Cadastro de Impressoras</h3>
     </div>
@@ -21,6 +21,6 @@
 
 @section('js')
     <script type="text/javascript" src="/vendor/jsvalidation/js/jsvalidation.js"></script>
-    {!! JsValidator::formRequest('App\Http\Requests\User\StoreRequest', '#form_id'); !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Printer\StoreRequest', '#form_id'); !!}
 @yield('js_form')
 @endsection

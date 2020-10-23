@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use FreeDSx\Snmp\SnmpClient;
 
 use App\Exceptions;
+use App\Printers;
 
 
 class Printer
@@ -34,7 +35,7 @@ class Printer
         try{
             //get name
 
-            $this->status = 200;
+            $this->status = "ONLINE";
 
             $name = $snmp->getValue('1.3.6.1.2.1.43.5.1.1.16.1');
 
@@ -104,6 +105,17 @@ class Printer
         }
     }
 
+    public static function rules($is_update = false)
+    {
+        $rules = [
+            'name' => ['string', 'required', 'max:191'],
+            'model' => ['string', 'required', 'max:191'],
+            'ipaddress' => ['string', 'required', 'max:191'],
+            'location_id' => ['int', 'required', 'max:191'],          
+            'serial_number' => ['string', 'required', 'min:14', 'max:15']
+        ];
 
+        return $rules;
+    }
     
 }

@@ -1,5 +1,4 @@
 @extends('layouts.panel')
-
 @section('title', 'Impressoras')
 @section('css')
 <!-- DataTables -->
@@ -23,6 +22,7 @@
                                 <th>Modelo</th>
                                 <th>Nome</th>
                                 <th>Toner Preto</th>
+                                <th>Status</th>
                                 <th style="width:175px">Ações</th>
                             </tr>
                         </thead>
@@ -33,6 +33,7 @@
                                 <td>{{$item->model}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->toner_black}}</td>
+                                <td>{{$item->status}}</td>
                                 <td>
                                     <a class="btn btn-primary btn-sm" href="http://{{$item->ipaddress}}" target="_blank">
                                         <i class="fa fa-pencil-alt white"></i> Acessar
@@ -52,7 +53,7 @@
                                             Quer mesmo deletar este registro?
                                         </div>
                                         <div class="modal-footer">
-                                            <form method="POST" action="{{ route('panel.user.destroy', $item->toner_black ) }}">
+                                            <form method="POST" action="">
                                                 @method('DELETE') @csrf
                                                 <button type="button" class="btn btn-primary"
                                                     data-dismiss="modal">Cancelar</button>

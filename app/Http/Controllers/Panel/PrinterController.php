@@ -1,54 +1,97 @@
 <?php
 
 namespace App\Http\Controllers\Panel;
-
+use Ping;
 use App\Http\Controllers\Controller;
 use App\Printers;
 use App\Printer;
+use App\Locations;
 use Illuminate\Http\Request;
 use FreeDSx\Snmp\SnmpClient;
 
 class PrinterController extends Controller
 {
     public function index()
-    {
-        $printers = Printers::orderBy('created_at', 'desc')->paginate(10);
-        return view('panel.printers.index',['printers' => $printers]);   
+    {    
+        $locations = Locations::all();
+
+        $location_atual = Locations::where("id",1)->get();;
+
+        $printers = Printers::where('location_id',1)->get();  
+        
+        return view('panel.printers.index',['printers' => $printers, 'locations' =>  $locations, 'locations_atual'=> $location_atual]);   
         
     }
+
+    public function listPrinters(Request $request)
+    {
+        $location_atual = Locations::where("id",$request->id)->get();
+
+        $locations = Locations::all();
+
+        $printers = Printers::where('location_id',$request->id)->get();             
+       
+        return view('panel.printers.index',['printers' => $printers, 'locations' =>  $locations, 'locations_atual'=> $location_atual]);   
+        
+    }
+    
+    
 
     public function levels()
     {
-        $ips = ['10.1.1.38', '10.1.1.32','10.1.1.30','10.1.1.33','10.1.1.39','10.1.1.35',
-        '10.1.1.37','10.1.1.36','10.1.1.31'];
-
-        $printers = array();
-
-        foreach($ips as $ip){
-            $response = new Printer($ip);
-            if($response->status == 200){    
-                $printers[] = $response;
-            }
-            $response = "";
-        }
-        return view('panel.printers.levels',['printers' => $printers]);   
+        $printers = Printers::all();  
+            
+       
+        foreach($printers as $printer)
+        {
+            $printer_offline = new \StdClass;
+       
+            if($printer->status === "ONLINE")
+            {
+                $response = ""; 
+                $response = new Printer($printer->ipaddress);  
+                $printers_final[] = $response; 
+               
+            }        
+            else
+            {
+                $printer_offline->name = $printer->name;
+                $printer_offline->model = $printer->model;
+                $printer_offline->serial_number = $printer->serial_number;
+                $printer_offline->toner_cyan = 0;
+                $printer_offline->toner_magenta = 0;
+                $printer_offline->toner_yellow = 0;
+                $printer_offline->toner_black = 0;
+                $printer_offline->ipaddress = $printer->ipaddress;    
+                $printer_offline->status = "OFFLINE";               
+                $printers_final[] = $printer_offline;             
+            }                      
+        }        
+      
+        return view('panel.printers.levels',['printers' => $printers_final]);   
         
     }
 
-    public function create()
+    public function create()    
     {
-        return view('panel.printers.create');
+        //$locations = Locations::all(['id', 'name'])->toArray();
+        $locations = Locations::pluck('name','id');
+        $selectedID = 1;
+        return view('panel.printers.create',compact('selectedID', 'locations'));
     }
 
     public function store(Request $request)
     {
-        $product = new Printers;
-        $product->name        = $request->name;
-        $product->description = $request->description;
-        $product->quantity    = $request->quantity;
-        $product->price       = $request->price;
-        $product->save();
-        //return redirect()->route('panel.printers.index')->with('message', 'Product created successfully!');
+        $printer = new Printers;
+        $printer->serial_number = $request->serial_number;
+        $printer->model         = $request->model;
+        $printer->name          = $request->name;
+        $printer->location_id   = $request->location_id;
+        $printer->type   = $request->type;
+        $printer->ipaddress     = $request->ipaddress;
+        $printer->save();
+        return redirect()->route('panel.printers.index')->with('message', 'Product created successfully!');
+   
     }
 
     public function show($id)
