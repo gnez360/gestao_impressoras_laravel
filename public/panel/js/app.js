@@ -45850,8 +45850,8 @@ $.validator.addMethod("dateFormat", function (value, element) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\crawler\laravel6-adminlte3\resources\panel\js\app.js */"./resources/panel/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\crawler\laravel6-adminlte3\resources\panel\sass\app.scss */"./resources/panel/sass/app.scss");
+__webpack_require__(/*! /var/www/html/gestao_impressoras_laravel/resources/panel/js/app.js */"./resources/panel/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/gestao_impressoras_laravel/resources/panel/sass/app.scss */"./resources/panel/sass/app.scss");
 
 
 /***/ })
