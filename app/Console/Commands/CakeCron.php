@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Redis;
 use App\Printers;
+use App\Printer;
 
 class CakeCron extends Command
 {
@@ -38,15 +40,41 @@ class CakeCron extends Command
      */
     public function handle()
     {
-        $printers = Printers::all();    
-        foreach ($printers as $printer)
+         
+
+       $printers = Printers::all();   
+         
+       foreach ($printers as $printer)
         {
             $status = $this->PingaIP($printer->ipaddress);
-            $print = Printers::find($printer->id);
-            $print->status = $status;
-            $print->save();
 
-        }
+            if($status === "ONLINE")
+            {
+                Redis::hmset("impressoras:status:$printer->serial_number", array("status"=> "ONLINE"));
+                
+                $response = new Printer($printer->ipaddress);  
+
+                Redis::hmset("impressoras:toner:$printer->serial_number", 
+                array("toner_cyan"=>$response->toner_cyan,
+                "toner_magenta"=>$response->toner_magenta,
+                "toner_yellow"=>$response->toner_yellow,
+                "toner_black"=> $response->toner_black));           
+               
+            }
+
+            else
+            {
+                Redis::hmset("impressoras:status:$printer->serial_number", array("status"=>"OFFLINE"));
+                Redis::hmset("impressoras:toner:$printer->serial_number", 
+                array("toner_cyan"=>"OFFLINE",
+                "toner_magenta"=>"OFFLINE",
+                "toner_yellow"=>"OFFLINE",
+                "toner_black"=>"OFFLINE"));
+            }
+        } 
+      
+        
+        
     }
 
     public function PingaIP($url)

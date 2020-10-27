@@ -36,7 +36,9 @@ class PrinterController extends Controller
     }
     
     
-
+public function info(){
+    return view('panel.printers.info');
+}
     public function levels()
     {
         $printers = Printers::all();  
@@ -72,8 +74,9 @@ class PrinterController extends Controller
         
     }
 
-    public function create()    
+    public function create()        
     {
+       
         //$locations = Locations::all(['id', 'name'])->toArray();
         $locations = Locations::pluck('name','id');
         $selectedID = 1;

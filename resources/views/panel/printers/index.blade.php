@@ -7,10 +7,12 @@
 @endsection
 @section('content')
 <div class="card">
+
     <!-- /.card-header -->
     <div class="card-header">
         <a href="{{ route('panel.printers.create') }}" class="row btn btn-primary float-left" role="button" id="addPrinter" name="addPrinter">Adicionar
-            Impressora</a> 
+            Impressora
+            </a> 
             @foreach ($locations_atual as $location)
             <h1 class="row justify-content-center"> Impressoras {{$location->name}} </h1>
             <?php $atual = $location->id ?>

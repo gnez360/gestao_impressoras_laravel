@@ -13,7 +13,7 @@
         "freedsx/snmp": "^0.4.0",
         "karlmonson/laravel-ping": "^1.0",
         "laravel/framework": "^6.0",
-        "laravel/passport": "^8.0",
+        "laravel/passport": "^9.3",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.0",
         "laravelcollective/html": "^6.0",

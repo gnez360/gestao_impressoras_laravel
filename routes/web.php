@@ -33,10 +33,12 @@ Route::group(['prefix' => 'panel', 'as' => 'panel.', 'middleware' => ['auth'], '
     Route::put('user/{idUser}', 'UserController@update')->name('user.update');
     Route::delete('user/{idUser}', 'UserController@destroy')->name('user.destroy');
 
+    Route::get('printers/create','PrinterController@create')->name('printers.create');
+    Route::get('printers/info','PrinterController@info')->name('printers.info');
     Route::get('printers','PrinterController@index')->name('printers.index');   
     Route::get('printers/levels','PrinterController@levels')->name('printers.levels');
-    Route::get('printers/{id}','PrinterController@listPrinters')->name('printers.list');
-    Route::get('printers/create','PrinterController@create')->name('printers.create');
+    Route::get('printers/{id}','PrinterController@listPrinters')->name('printers.list');   
     Route::post('printers','PrinterController@store')->name('printers.store');
     Route::get('printers/test/{ip}','PrinterController@test')->name('printers.test');
+  
 });
